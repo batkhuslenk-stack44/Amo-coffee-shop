@@ -1,63 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cafe Menu</title>
-    <link href="styles.css" rel="stylesheet"/>
-  </head>
-  <body>
-    <div class="menu">
-      <main>
-        <h1>CAMPER CAFE</h1>
-        <p class="established">Est. 2020</p>
-        <hr>
-        <section>
-          <h2>Coffee</h2>
-          <img src="https://cdn.freecodecamp.org/curriculum/css-cafe/coffee.jpg" alt="coffee icon"/>
-          <article class="item">
-            <p class="flavor">French Vanilla</p><p class="price">3.00</p>
-          </article>
-          <article class="item">
-            <p class="flavor">Caramel Macchiato</p><p class="price">3.75</p>
-          </article>
-          <article class="item">
-            <p class="flavor">Pumpkin Spice</p><p class="price">3.50</p>
-          </article>
-          <article class="item">
-            <p class="flavor">Hazelnut</p><p class="price">4.00</p>
-          </article>
-          <article class="item">
-            <p class="flavor">Mocha</p><p class="price">4.50</p>
-          </article>
-        </section>
-        <section>
-          <h2>Desserts</h2>
-          <img src="https://cdn.freecodecamp.org/curriculum/css-cafe/pie.jpg" alt="pie icon"/>
-          <article class="item">
-            <p class="dessert">Donut</p><p class="price">1.50</p>
-          </article>
-          <article class="item">
-            <p class="dessert">Cherry Pie</p><p class="price">2.75</p>
-          </article>
-          <article class="item">
-            <p class="dessert">Cheesecake</p><p class="price">3.00</p>
-          </article>
-          <article class="item">
-            <p class="dessert">Cinnamon Roll</p><p class="price">2.50</p>
-          </article>
-        </section>
-      </main>
-      <hr class="bottom-line">
-      <footer>
-        <address>
-          <p>
-            <a href="https://www.freecodecamp.org" target="_blank">Visit our website</a>
-          </p>
-          <p class="address">123 Free Code Camp Drive</p>
-        </address>
-      </footer>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#050b18">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Coffee Shop Calculator</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon"
+    href="https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=180&h=180&auto=format&fit=crop">
+  <link rel="stylesheet" href="styles.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Raleway:wght@400;600&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+
+  <div class="blob-1"></div>
+  <div class="blob-2"></div>
+
+  <header>
+    <div class="header-content">
+      <div class="title-group">
+        <h1>COFFEE</h1>
+        <p>Premium selection • Roasted to perfection</p>
+      </div>
+      <div class="admin-controls">
+        <button id="admin-login-btn" class="admin-toggle-btn">🔐 Admin Lock</button>
+        <button id="admin-logout-btn" class="admin-toggle-btn admin-only">🔓 Logout</button>
+      </div>
     </div>
-  </body>
+  </header>
+
+  <main>
+    <div class="admin-panel admin-only">
+      <h2>Add New Item</h2>
+      <div class="add-item-form">
+        <div class="input-group">
+          <input type="text" id="new-item-name" placeholder="Item Name (e.g. Mocha)">
+          <input type="number" id="new-item-price" placeholder="Price (e.g. 7000)">
+        </div>
+        <div class="upload-group">
+          <label for="new-item-image" class="upload-btn">
+            <span>📸 Upload Image</span>
+            <input type="file" id="new-item-image" accept="image/*" hidden>
+          </label>
+          <div id="image-preview" class="image-preview-box"></div>
+        </div>
+        <button id="add-item-btn" class="add-btn">Add to Menu</button>
+      </div>
+    </div>
+
+    <!-- Admin Login Modal -->
+    <div id="login-modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Admin Login</h2>
+          <button id="close-login-modal" class="close-btn">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p>Please enter the admin password to access management tools.</p>
+          <div class="input-group">
+            <input type="password" id="admin-password" placeholder="Password">
+          </div>
+          <button id="submit-login-btn" class="add-btn">Access Menu Control</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="menu-grid" class="menu-container">
+      <!-- Items will be rendered dynamically from script.js -->
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="edit-modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Edit Item</h2>
+          <button id="close-modal" class="close-btn">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="input-group">
+            <label>Name:</label>
+            <input type="text" id="edit-name">
+          </div>
+          <div class="input-group">
+            <label>Price (₮):</label>
+            <input type="number" id="edit-price">
+          </div>
+          <div class="upload-group">
+            <label for="edit-image" class="upload-btn">
+              <span>📸 Update Photo</span>
+              <input type="file" id="edit-image" accept="image/*" hidden>
+            </label>
+            <div id="edit-preview" class="image-preview-box"></div>
+          </div>
+          <button id="save-edit-btn" class="add-btn">Save Changes</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="calculator-panel">
+      <div class="order-info">
+        <h2>Your Order</h2>
+        <div class="total-display">
+          <span id="total-price">0₮</span>
+        </div>
+      </div>
+      <button onclick="alert('Order placed! Thank you! ☕')" class="order-btn">Place Order</button>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Morning Java Coffee Shop</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
 </html>
-<!-- CSS moved to week2/styles.css -->
