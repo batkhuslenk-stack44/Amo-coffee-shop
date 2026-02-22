@@ -2,21 +2,30 @@
   "name": "Coffee Shop Calculator",
   "short_name": "CoffeeShop",
   "description": "Premium Coffee Shop menu and order calculator.",
-  "start_url": "index.html",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#050b18",
-  "theme_color": "#00d2ff",
+  "theme_color": "#050b18",
   "orientation": "portrait",
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=192&h=192&auto=format&fit=crop",
       "sizes": "192x192",
-      "type": "image/jpeg"
+      "type": "image/jpeg",
+      "purpose": "any"
+    },
+    {
+      "src": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=192&h=192&auto=format&fit=crop",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "maskable"
     },
     {
       "src": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=512&h=512&auto=format&fit=crop",
       "sizes": "512x512",
-      "type": "image/jpeg"
+      "type": "image/jpeg",
+      "purpose": "any"
     }
   ]
 }

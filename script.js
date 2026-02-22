@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeLoginModalBtn = document.getElementById('close-login-modal');
     const adminPasswordInput = document.getElementById('admin-password');
     const submitLoginBtn = document.getElementById('submit-login-btn');
+    const installPwaBtn = document.getElementById('install-pwa-btn');
 
     // State
     const ADMIN_PASSWORD = "admin123";
@@ -38,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let selectedImageData = null;
     let editImageData = null;
     let currentEditingIndex = -1;
+    let deferredPrompt = null;
 
     const DEFAULT_MENU = [
         { name: "Espresso", price: 5000, image: "https://images.unsplash.com/photo-1510707577719-af7c183a14df?q=80&w=400" },
@@ -272,6 +274,37 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // PWA Install Logic
+    window.addEventListener('beforeinstallprompt', (e) => {
+        // Prevent Chrome 67 and earlier from automatically showing the prompt
+        e.preventDefault();
+        // Stash the event so it can be triggered later.
+        deferredPrompt = e;
+        // Update UI notify the user they can add to home screen
+        if (installPwaBtn) installPwaBtn.style.display = 'block';
+    });
+
+    if (installPwaBtn) {
+        installPwaBtn.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                // Show the prompt
+                deferredPrompt.prompt();
+                // Wait for the user to respond to the prompt
+                const { outcome } = await deferredPrompt.userChoice;
+                console.log(`User response to the install prompt: ${outcome}`);
+                // We've used the prompt, and can't use it again, throw it away
+                deferredPrompt = null;
+                // Hide the install button
+                installPwaBtn.style.display = 'none';
+            }
+        });
+    }
+
+    window.addEventListener('appinstalled', (evt) => {
+        console.log('App installed successfully');
+        if (installPwaBtn) installPwaBtn.style.display = 'none';
+    });
 
     // Initial load
     setAdminMode(isAdmin);
