@@ -277,12 +277,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // PWA Install Logic
     window.addEventListener('beforeinstallprompt', (e) => {
+        console.log('beforeinstallprompt event fired! Browser is ready to install.');
         // Prevent Chrome 67 and earlier from automatically showing the prompt
         e.preventDefault();
         // Stash the event so it can be triggered later.
         deferredPrompt = e;
         // Update UI notify the user they can add to home screen
-        if (installPwaBtn) installPwaBtn.style.display = 'block';
+        if (installPwaBtn) {
+            console.log('Showing install button now...');
+            installPwaBtn.style.display = 'block';
+        }
     });
 
     if (installPwaBtn) {
