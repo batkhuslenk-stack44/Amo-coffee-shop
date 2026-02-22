@@ -1,6 +1,6 @@
 const CACHE_NAME = 'coffee-shop-v1';
 const ASSETS_TO_CACHE = [
-    'coffeeshop.html',
+    'index.html',
     'styles.css',
     'script.js',
     'manifest.json',

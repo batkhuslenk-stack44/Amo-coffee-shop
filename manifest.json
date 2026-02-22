@@ -2,7 +2,7 @@
   "name": "Coffee Shop Calculator",
   "short_name": "CoffeeShop",
   "description": "Premium Coffee Shop menu and order calculator.",
-  "start_url": "coffeeshop.html",
+  "start_url": "index.html",
   "display": "standalone",
   "background_color": "#050b18",
   "theme_color": "#00d2ff",
